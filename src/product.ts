@@ -1,26 +1,11 @@
 export class Product {
   constructor(
-    id: number,
-    name: String,
-    company: String,
-    price: number,
-    isShow: boolean,
-    createDate: Date,
-    modifyDate: undefined | Date
-  ) {
-    this.id = id;
-    this.name = name;
-    this.company = company;
-    this.price = price;
-    this.isShow = isShow;
-    this.createDate = createDate;
-    this.modifyDate = modifyDate;
-  }
-  id: number;
-  name: String;
-  company: String;
-  price: number;
-  isShow: boolean;
-  createDate: Date;
-  modifyDate: undefined | Date;
+    public id: number,
+    public name: String,
+    public company: String,
+    public price: number,
+    public isShow: boolean,
+    public createDate: Date,
+    public modifyDate?: Date
+  ) {}
 }

@@ -6,8 +6,7 @@ const product = new Product(
   "博碩文化",
   500,
   true,
-  new Date(2024, 3, 10),
-  undefined
+  new Date(2024, 3, 10)
 );
 console.log(product);
 console.table(product);
