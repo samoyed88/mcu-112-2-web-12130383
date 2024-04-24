@@ -16,6 +16,7 @@ export class ProductCardComponent {
   @Input() imgUrl!: string;
 
   @Output() isShowChange = new EventEmitter<boolean>();
+
   onsetDisplay(isShow: boolean): void {
     //this.isShow = isShow;
     this.isShowChange.emit(isShow);
