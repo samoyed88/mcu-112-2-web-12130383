@@ -1,10 +1,10 @@
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output, booleanAttribute, numberAttribute } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CurrencyPipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
@@ -19,6 +19,7 @@ export class ProductCardComponent {
   @Output() isShowChange = new EventEmitter<boolean>();
 
   @Input() createDate!: Date;
+  @Input({ transform: numberAttribute }) price!: number;
 
   onsetDisplay(isShow: boolean): void {
     //this.isShow = isShow;
