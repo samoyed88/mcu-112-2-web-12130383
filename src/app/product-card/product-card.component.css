@@ -30,3 +30,7 @@ button.remove {
   background-color: #ba1a1a;
   color: white;
 }
+
+.notShow {
+  color: #999;
+}
