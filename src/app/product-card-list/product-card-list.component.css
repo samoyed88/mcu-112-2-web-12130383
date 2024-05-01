@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   gap: 20px;
 }
-.product.card {
+.product-card {
   flex-basis: calc(20% - 40px);
 }
 div.data-empty {
