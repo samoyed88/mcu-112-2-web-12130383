@@ -23,5 +23,7 @@ export class ProductCardComponent {
   @HostBinding('class')
   class = 'product-card';
 
+  @Output() edit = new EventEmitter<void>();
+  @Output() remove = new EventEmitter<void>();
   @Output() view = new EventEmitter<void>();
 }
