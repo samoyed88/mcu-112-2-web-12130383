@@ -12,12 +12,11 @@ import { ProductService } from '../services/product.service';
   imports: [ProductPageComponent, ProductCardListComponent],
 })
 export class ProductPageComponent implements OnInit {
-  private productService!: ProductService;
+  private productService = inject(ProductService);
 
   products!: Product[];
 
   ngOnInit(): void {
-    this.productService = new ProductService();
     this.products = this.productService.getList();
   }
   router = inject(Router);
