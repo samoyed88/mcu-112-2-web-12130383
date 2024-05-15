@@ -33,7 +33,6 @@ export class ProductDetailPageComponent implements OnInit {
     this.router.navigate(['product', 'form', this.product.id]);
   }
   onRemove(): void {
-    this.productService.remove(this.product.id);
-    this.router.navigate(['products']);
+    this.productService.remove(this.product.id).subscribe(() => this.router.navigate(['products']));
   }
 }

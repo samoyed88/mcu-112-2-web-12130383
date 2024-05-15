@@ -31,14 +31,14 @@ export class ProductPageComponent implements OnInit {
       createDate: new Date(),
       price: 10000,
     });
-    this.productService.add(product);
+    this.productService.add(product).subscribe();
   }
 
   onEdit(product: Product): void {
     this.router.navigate(['product', 'form', product.id]);
   }
   onRemove({ id }: Product): void {
-    this.productService.remove(id);
+    this.productService.remove(id).subscribe();
   }
   onView(product: Product): void {
     this.router.navigate(['product', 'view', product.id]);
