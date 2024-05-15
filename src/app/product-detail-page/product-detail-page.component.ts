@@ -22,7 +22,7 @@ export class ProductDetailPageComponent implements OnInit {
   private productService = inject(ProductService);
 
   ngOnInit(): void {
-    this.product = this.productService.getById(this.id);
+    this.productService.getById(this.id).subscribe((product) => (this.product = product));
   }
 
   onBack(): void {
