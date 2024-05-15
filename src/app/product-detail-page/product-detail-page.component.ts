@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnInit, inject, numberAttribute } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../model/product';
 import { ProductService } from './../services/product.service';
@@ -11,19 +11,13 @@ import { ProductService } from './../services/product.service';
   templateUrl: './product-detail-page.component.html',
   styleUrl: './product-detail-page.component.css',
 })
-export class ProductDetailPageComponent implements OnInit {
-  @Input({ transform: numberAttribute })
-  id!: number;
-
+export class ProductDetailPageComponent {
+  @Input()
   product!: Product;
 
   private router = inject(Router);
 
   private productService = inject(ProductService);
-
-  ngOnInit(): void {
-    this.productService.getById(this.id).subscribe((product) => (this.product = product));
-  }
 
   onBack(): void {
     this.router.navigate(['products']);
