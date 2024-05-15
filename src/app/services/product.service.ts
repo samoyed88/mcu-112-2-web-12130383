@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Product } from './../model/product';
 
 @Injectable({
@@ -55,7 +55,7 @@ export class ProductService {
   }
 
   getList(): Observable<Product[]> {
-    return of(this._data).pipe(delay(2000));
+    return of(this._data);
   }
 
   add(product: Product): Observable<Product> {
@@ -67,13 +67,13 @@ export class ProductService {
   update(product: Product): Observable<Product> {
     const index = this._data.findIndex(({ id }) => product.id === id);
     const newProduct = new Product({ ...product });
-    this._data[index];
+    this._data = [...this._data, newProduct];
     return of(newProduct);
   }
 
   remove(productId: number): Observable<Product> {
-    const index = this._data.findIndex(({ id }) => productId === id);
-    const product = this._data.splice(index, 1);
-    return of(product[0]);
+    const product = this._data.find(({ id }) => productId === id)!;
+    this._data = [...this._data.filter(({ id }) => productId !== id)];
+    return of(product);
   }
 }
