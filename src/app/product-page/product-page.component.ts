@@ -17,7 +17,7 @@ export class ProductPageComponent implements OnInit {
   products!: Product[];
 
   ngOnInit(): void {
-    this.products = this.productService.getList();
+    this.productService.getList().subscribe((products) => (this.products = products));
   }
   router = inject(Router);
 
