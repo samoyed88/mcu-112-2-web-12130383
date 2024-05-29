@@ -1,5 +1,6 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, startWith, switchMap } from 'rxjs';
 import { Product } from '../model/product';
@@ -11,15 +12,17 @@ import { ProductService } from '../services/product.service';
   standalone: true,
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css',
-  imports: [AsyncPipe, ProductPageComponent, ProductCardListComponent],
+  imports: [AsyncPipe, JsonPipe, ReactiveFormsModule, ProductCardListComponent],
 })
 export class ProductPageComponent {
   private productService = inject(ProductService);
   private readonly refresh$ = new Subject<void>();
 
+  protected readonly formControl = new FormControl<string | undefined>(undefined);
+
   readonly products$ = this.refresh$.pipe(
     startWith(undefined),
-    switchMap(() => this.productService.getList('書籍A', 1, 5))
+    switchMap(() => this.productService.getList(undefined, 1, 5))
   );
 
   router = inject(Router);
