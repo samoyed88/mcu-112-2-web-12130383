@@ -4,6 +4,18 @@
 }
 .toolbar {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type='text'] {
+  margin-right: 10px;
+  padding: 5px;
+  width: 300px;
+  height: 30px;
+  font-size: 20px;
+  border: solid 1px #007bff;
+  border-radius: 20px;
 }
 
 button {
