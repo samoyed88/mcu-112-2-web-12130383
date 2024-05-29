@@ -55,48 +55,6 @@
       "createDate": "2023-10-17T00:00:00.000+08:00",
       "price": 10000,
       "id": 4
-    },
-    {
-      "name": "書籍E",
-      "authors": [
-        "作者甲",
-        "作者乙",
-        "作者丙"
-      ],
-      "company": "博碩文化",
-      "isShow": true,
-      "imgUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "createDate": "2023-10-17T00:00:00.000+08:00",
-      "price": 10000,
-      "id": 5
-    },
-    {
-      "name": "書籍F",
-      "authors": [
-        "作者甲",
-        "作者乙",
-        "作者丙"
-      ],
-      "company": "博碩文化",
-      "isShow": true,
-      "imgUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "createDate": "2023-10-17T00:00:00.000+08:00",
-      "price": 10000,
-      "id": 6
-    },
-    {
-      "name": "書籍G",
-      "authors": [
-        "作者甲",
-        "作者乙",
-        "作者丙"
-      ],
-      "company": "博碩文化",
-      "isShow": true,
-      "imgUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "createDate": "2023-10-17T00:00:00.000+08:00",
-      "price": 10000,
-      "id": 7
     }
   ]
 }
