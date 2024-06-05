@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { filter, map, tap } from 'rxjs';
 import { IProductForm } from '../interface/product-form.interface';
 import { Product } from '../model/product';
 import { ProductService } from '../services/product.service';
@@ -25,6 +25,10 @@ export class ProductFormPageComponent implements OnInit {
     isShow: new FormControl<boolean>(false, { nonNullable: true }),
     price: new FormControl<number | null>(null, { validators: [Validators.required, Validators.pattern('\\d+')] }),
   });
+
+  get id(): FormControl<number | null> {
+    return this.form.get('id') as FormControl<number | null>;
+  }
 
   get name(): FormControl<string | null> {
     return this.form.get('name') as FormControl<string | null>;
@@ -53,16 +57,25 @@ export class ProductFormPageComponent implements OnInit {
   private readonly productService = inject(ProductService);
 
   ngOnInit(): void {
-    this.route.data.pipe(map(({ product }: Data) => product)).subscribe((product) => (this.product = product));
+    this.route.data
+      .pipe(
+        map(({ product }: Data) => product as Product),
+        filter((product) => !!product),
+        tap(({ authors }) => this.onAddAuthors(authors.length))
+      )
+      .subscribe((product) => this.form.patchValue(product));
   }
 
-  onAddAuthors(): void {
-    const formControl = new FormControl<string | null>(null, { validators: [Validators.required] });
-    this.authors.push(formControl);
+  onAddAuthors(count = 1): void {
+    for (let i = 1; i <= count; i++) {
+      const formControl = new FormControl<string | null>(null, { validators: [Validators.required] });
+      this.authors.push(formControl);
+    }
   }
 
   onSave(): void {
     const formData = new Product({
+      id: this.id.value ?? undefined,
       name: this.name.value!,
       authors: this.authors.value.map((author) => author!),
       company: this.company.value!,
@@ -71,7 +84,8 @@ export class ProductFormPageComponent implements OnInit {
       createDate: new Date(),
       price: this.price.value!,
     });
-    this.productService.add(formData).subscribe(() => this.router.navigate(['products']));
+    const action$ = this.id.value ? this.productService.update(formData) : this.productService.add(formData);
+    action$.subscribe(() => this.router.navigate(['products']));
   }
 
   onCancel(): void {
